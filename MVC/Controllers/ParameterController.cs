@@ -10,17 +10,31 @@ namespace MVC.Controllers
 {
     public class ParameterController : Controller
     {
-
+        //trainee view
+        public ActionResult TraineeView()
+        {
+            return View(trainee);
+        }
+        //trainer view
+        public ActionResult TrainerView()
+        {
+            return View(trainer);
+        }
+        //details of trainee
         static IList<Details> trainee = new List<Details>
         {
             new Details() {Id = 101 , Name = "Harita" , Role = "Trainee"},
             new Details() {Id = 101 , Name = "Trainee" ,Role = "Trainee"}
 
         };
-        static IList<Details> trainer = new List<Details>
+        //details of trainer
+        static IList<Details1> trainer = new List<Details1>
         {
-          new Details() {Id = 101 , Name = "Trainer" , Role = "Trainer" }
+          new Details1() {Id = 101 , Name = "Thangam Mam" , Role = "Trainer" },
+          new Details1() {Id = 102 , Name = "Pallavi Mam" , Role = "Trainer" }
+
         };
+
         // GET: Parameter
 
         //question 1 parameterized 
@@ -28,11 +42,11 @@ namespace MVC.Controllers
         {
             if (id == 1)
             {
-                return View(trainee);
+                return RedirectToAction("TraineeView","Parameter");
             }
             else if (id == 2)
             {
-                return View(trainer);
+                return RedirectToAction("TrainerView", "Parameter");
             }
             else
             {
@@ -55,19 +69,11 @@ namespace MVC.Controllers
 
         //question 4 javascriptresult
 
-        public JavaScriptResult Jsexample()
+        public ActionResult AgeView(AgeCalculation ag)
         {
-            int birthYear = 2000;
-            int currentYear = DateTime.Now.Year;
-            int age = currentYear - birthYear;
-            var agecalculator = "alert('Age Calculator example');";
-            return new JavaScriptResult() { Script = agecalculator };
-        }
-
-        public ActionResult Js1()
-        {
-      
-            return View();
+           
+                return View("AgeView", ag);
+           
         }
 
        
